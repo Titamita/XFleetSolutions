@@ -16,4 +16,7 @@ public class FleetVehiclesPage {
 
     @FindBy(xpath = "//a[.='Manage filters']")
     public WebElement manageFilterButton;
+
+    @FindBy(xpath = "//table//tr[@class='grid-header-row']//input[@type='checkbox']")
+    public WebElement toCheckAllCarsCheckbox;
 }
