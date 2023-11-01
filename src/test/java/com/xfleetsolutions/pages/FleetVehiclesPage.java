@@ -22,4 +22,13 @@ public class FleetVehiclesPage {
 
     @FindBy(xpath = "//table//tr[@class='grid-header-row']//input[@type='checkbox']")
     public WebElement toCheckAllCarsCheckbox;
+
+    @FindBy(id = "ui-multiselect-0-0-option-1")
+    public WebElement tagsCheckBox;
+
+    @FindBy(id = "ui-multiselect-0-0-option-2")
+    public WebElement driverCheckBox;
+
+    @FindBy(id = "ui-multiselect-0-0-option-3")
+    public WebElement locationCheckBox;
 }
