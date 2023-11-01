@@ -20,4 +20,6 @@ public class FleetVehiclesPage {
     @FindBy(css = ".grid-row.row-click-action")
     public WebElement vehicleRow;
 
+    @FindBy(xpath = "//table//tr[@class='grid-header-row']//input[@type='checkbox']")
+    public WebElement toCheckAllCarsCheckbox;
 }
