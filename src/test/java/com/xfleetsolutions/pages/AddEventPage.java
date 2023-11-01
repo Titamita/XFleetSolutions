@@ -14,4 +14,10 @@ public class AddEventPage {
     @FindBy (xpath = "//a[text()='Add Event']")
     public WebElement addEventButton;
 
+    @FindBy(xpath = "//span[text()='General Information']")
+    public WebElement generalInfo;
+
+    @FindBy(xpath = "//span[text()='Add Event']")
+    public WebElement addEventPopUp;
+
 }
