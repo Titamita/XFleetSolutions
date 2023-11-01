@@ -38,6 +38,12 @@ public abstract class BasePage {
     @FindBy(linkText = "My User")
     public WebElement myUser; // ==> Did not find this in our app
 
+    @FindBy(xpath = "//span[text()='Vehicles']")
+    public WebElement vehicle;
+
+    @FindBy(xpath = "//span[normalize-space()='Fleet']")
+    public WebElement fleetButton;
+
     public BasePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }

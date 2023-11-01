@@ -16,4 +16,8 @@ public class FleetVehiclesPage {
 
     @FindBy(xpath = "//a[.='Manage filters']")
     public WebElement manageFilterButton;
+
+    @FindBy(css = ".grid-row.row-click-action")
+    public WebElement vehicleRow;
+
 }
