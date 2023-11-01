@@ -26,6 +26,20 @@ Feature: Selection of vehicle functionality verification
       | store manager |
 
 
+  Scenario Outline: Verifying any car can be selected
+    Given the user logged in as "<userType>"
+    And user clicks on Fleet Module and select Vehicles from dropdown
+    And user clicks on any checkbox and it is enabled and clickable
+    Then user is able to select any car by clicking on a checkbox
+
+    Examples:
+      | userType      |
+      | sales manager |
+      | store manager |
+
+
+
+
 
 
 
