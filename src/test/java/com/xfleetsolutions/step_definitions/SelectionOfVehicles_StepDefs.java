@@ -5,6 +5,7 @@ import com.xfleetsolutions.pages.FleetVehiclesPage;
 import com.xfleetsolutions.utilities.BrowserUtils;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 public class SelectionOfVehicles_StepDefs extends BasePage {
 
@@ -13,7 +14,9 @@ public class SelectionOfVehicles_StepDefs extends BasePage {
     @Then("user sees all the checkboxes are unchecked")
     public void user_sees_all_the_checkboxes_are_unchecked() {
 
-        Assert.assertTrue(!fleetVehiclesPage.toCheckAllCarsCheckbox.isSelected());
+        for (WebElement each : fleetVehiclesPage.checkboxesForCarSelection) {
+            Assert.assertTrue(!each.isSelected());
+        }
     }
 
 
