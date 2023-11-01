@@ -4,6 +4,7 @@ Feature: As a store manager and sales manager, I should be able to add an event
   Background: User is already in the log in page
     Given the user is on the login page
 
+  @AC1_AccessToAddEventPage
   Scenario Outline: User should access the "Add Event" page from the "General Information" page
       #(by clicking on any vehicle/row under Fleet-Vehicle module)
     Given the user logged in as "<userType>"
@@ -16,7 +17,7 @@ Feature: As a store manager and sales manager, I should be able to add an event
       | sales manager |
       | store manager |
 
-  @AC10
+  @AC2_AddEventButton
   Scenario Outline: Sales Manager and Store manager can click "Add Event" button,
   but Driver can NOT see "Add Event" button
     Given the user logged in as "<userType>"
@@ -29,7 +30,14 @@ Feature: As a store manager and sales manager, I should be able to add an event
       | sales manager |
       | store manager |
 
-
-
-
-
+  @AC3_AddEventPopUp
+  Scenario Outline: After user clicking on Add event button, Add Event page should pop up
+    Given the user logged in as "<userType>"
+    When user hover over on Fleet button and click Vehicle button
+    And click on vehicle row
+    And "<userType>" click Add Event button
+    Then Add Event page should pop up
+    Examples:
+      | userType      |
+      | sales manager |
+      | store manager |
