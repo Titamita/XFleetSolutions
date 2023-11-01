@@ -11,7 +11,7 @@ public class AddEventPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy (xpath = "//div[@class='pull-right']//a[text()='Add Event']")
+    @FindBy (xpath = "//a[text()='Add Event']")
     public WebElement addEventButton;
 
 }
