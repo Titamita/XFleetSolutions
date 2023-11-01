@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class FleetVehiclesPage {
 
     public FleetVehiclesPage(){
@@ -31,4 +33,7 @@ public class FleetVehiclesPage {
 
     @FindBy(id = "ui-multiselect-0-0-option-3")
     public WebElement locationCheckBox;
+
+    @FindBy(xpath = "//table//tr//input[@type='checkbox']")
+    public List<WebElement> checkboxesForCarSelection;
 }
