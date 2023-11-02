@@ -41,3 +41,24 @@ Feature: As a store manager and sales manager, I should be able to add an event
       | userType      |
       | sales manager |
       | store manager |
+
+  @AC4_AddEventPopUp
+  Scenario Outline: Compulsory fields are shown as below:
+  -> Title -> Owner -> Organizer display name -> Organizer email -> Start -> End
+    Given the user logged in as "<userType>"
+    When user hover over on Fleet button and click Vehicle button
+    And click on vehicle row
+    And "<userType>" click Add Event button
+    Then Compulsory fields are shown in certain order: "<expectedReqFields>"
+      | Title                  |
+      | Owner                  |
+      | Organizer display name |
+      | Organizer email        |
+      | Start                  |
+      | End                    |
+    Examples:
+      | userType      |
+      | sales manager |
+      | store manager |
+
+
