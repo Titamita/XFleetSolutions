@@ -8,11 +8,14 @@ import com.xfleetsolutions.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddEvent_CompulsoryField_StepDefs extends BasePage {
 
@@ -74,5 +77,19 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
 
     }
 
+    @Then("Compulsory fields are shown in certain order: {string}")
+    public void compulsory_fields_are_shown_in_certain_order(String user, List<String> expectedReqFields) {
+
+        wait.until(ExpectedConditions.visibilityOf(ae.addEventPopUp));
+
+        List<String> actualReqFields = new ArrayList<>();
+
+        for (WebElement each : ae.requiredFields) {
+
+            actualReqFields.add(each.getText().replace("*", ""));
+
+        }
+        Assert.assertEquals(expectedReqFields, actualReqFields);
+    }
 
 }
