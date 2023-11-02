@@ -1,10 +1,10 @@
-@US-156
+
 Feature: Users should be able to filter vehicle table under Fleet-Vehicle page
 
   Background: User is already in the log in page
     Given the user is on the login page
 
-    @AC1_JD
+    @B30G10-173 @wip
   Scenario Outline: Manage Filter button verification
     Given the user logged in as "<userType>"
     And user clicks on Fleet Module and select Vehicles from dropdown
@@ -18,7 +18,7 @@ Feature: Users should be able to filter vehicle table under Fleet-Vehicle page
       | store manager |
 
 
-      @AC2_JD
+      @B30G10-174 @wip
     Scenario Outline: User can apply filters by clicking on any filter name under Manage Filters menu
       Given the user logged in as "<userType>"
       And user clicks on Fleet Module and select Vehicles from dropdown
@@ -33,7 +33,7 @@ Feature: Users should be able to filter vehicle table under Fleet-Vehicle page
         | store manager | Location |
 
 
-        @AC3_JD
+        @B30G10-175 @wip
       Scenario Outline: User can find a filter by typing the filter name under Manage Filters menu
         Given the user logged in as "<userType>"
         And user clicks on Fleet Module and select Vehicles from dropdown
