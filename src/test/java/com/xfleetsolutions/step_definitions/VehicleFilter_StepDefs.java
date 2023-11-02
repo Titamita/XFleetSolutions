@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class VehicleFilter_StepDefs extends BasePage{
     @Given("user clicks on Filter icon")
     public void user_clicks_on_filter_icon() {
 
-        BrowserUtils.waitForVisibility(fleetVehiclesPage.filterButton, 5);
+        BrowserUtils.waitForVisibility(fleetVehiclesPage.filterButton, 15);
 
         fleetVehiclesPage.filterButton.click();
 
@@ -42,6 +43,8 @@ public class VehicleFilter_StepDefs extends BasePage{
     @Given("user clicks on Manage Filter button")
     public void user_clicks_on_manage_filter_button() {
 
+        BrowserUtils.waitForVisibility(fleetVehiclesPage.manageFilterButton, 10);
+
         fleetVehiclesPage.manageFilterButton.click();
 
     }
@@ -51,14 +54,17 @@ public class VehicleFilter_StepDefs extends BasePage{
         switch (checkbox) {
             case "Tags":
                 fleetVehiclesPage.tagsCheckBox.click();
+                BrowserUtils.waitForVisibility(fleetVehiclesPage.tagsCheckBox, 5);
                 Assert.assertTrue(fleetVehiclesPage.tagsCheckBox.isSelected());
                 break;
             case "Driver":
                 fleetVehiclesPage.driverCheckBox.click();
+                BrowserUtils.waitForVisibility(fleetVehiclesPage.driverCheckBox, 5);
                 Assert.assertTrue(fleetVehiclesPage.driverCheckBox.isSelected());
                 break;
             case "Location":
                 fleetVehiclesPage.locationCheckBox.click();
+                BrowserUtils.waitForVisibility(fleetVehiclesPage.locationCheckBox, 5);
                 Assert.assertTrue(fleetVehiclesPage.locationCheckBox.isSelected());
         }
 
@@ -74,8 +80,6 @@ public class VehicleFilter_StepDefs extends BasePage{
 
         List<WebElement> actualFilterCheckboxes = fleetVehiclesPage.allFilterCheckBoxesAfterSearch;
 
-        boolean filterFound = false;
-
         for (WebElement each : actualFilterCheckboxes) {
 
             String actualCheckboxText = each.getAttribute("title");
@@ -84,7 +88,6 @@ public class VehicleFilter_StepDefs extends BasePage{
 
             if (actualCheckboxText.contains(expectedFilterName)) {
 
-                filterFound = true;
                 Assert.assertEquals(expectedFilterName, actualCheckboxText);
                 break;
             }
