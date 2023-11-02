@@ -8,6 +8,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class VehicleFilter_StepDefs extends BasePage{
 
@@ -22,6 +25,8 @@ public class VehicleFilter_StepDefs extends BasePage{
     }
     @Given("user clicks on Filter icon")
     public void user_clicks_on_filter_icon() {
+
+        BrowserUtils.waitForVisibility(fleetVehiclesPage.filterButton, 5);
 
         fleetVehiclesPage.filterButton.click();
 
@@ -56,6 +61,36 @@ public class VehicleFilter_StepDefs extends BasePage{
                 fleetVehiclesPage.locationCheckBox.click();
                 Assert.assertTrue(fleetVehiclesPage.locationCheckBox.isSelected());
         }
+
+    }
+
+    @Then("user type {string} in the Manage Filter search box")
+    public void user_type_in_the_manage_filter_search_box(String filterName) {
+
+        fleetVehiclesPage.manageFilterSearchBox.sendKeys(filterName);
+    }
+    @When("user should see {string} as available filter")
+    public void user_should_see_as_available_filter(String expectedFilterName) {
+
+        List<WebElement> actualFilterCheckboxes = fleetVehiclesPage.allFilterCheckBoxesAfterSearch;
+
+        boolean filterFound = false;
+
+        for (WebElement each : actualFilterCheckboxes) {
+
+            String actualCheckboxText = each.getAttribute("title");
+
+            //System.out.println("Actual checkbox text: " + actualCheckboxText);
+
+            if (actualCheckboxText.contains(expectedFilterName)) {
+
+                filterFound = true;
+                Assert.assertEquals(expectedFilterName, actualCheckboxText);
+                break;
+            }
+        }
+
+
 
     }
 }
