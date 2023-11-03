@@ -25,5 +25,13 @@ public class AddEventPage {
     @FindBy(xpath = "//label[@class='required']")
     public List<WebElement> requiredFields;
 
+    @FindBy(xpath = "//button[@type= 'submit']")
+    public WebElement saveButton;
+
+    @FindBy(xpath = "//span[text()='This value should not be blank.']")
+    public WebElement errorMessage;
+
+    @FindBy(name = "oro_calendar_event_form[title]")
+    public WebElement titleField;
 
 }

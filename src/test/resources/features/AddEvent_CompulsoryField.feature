@@ -61,4 +61,15 @@ Feature: As a store manager and sales manager, I should be able to add an event
       | sales manager |
       | store manager |
 
-
+  @AC5_CompulsoryField
+  Scenario Outline: If any compulsory field is not filled, "This value should not be blank."
+  message should be displayed after clicking on save button
+    Given the user logged in as "<userType>"
+    When user hover over on Fleet button and click Vehicle button
+    And click on vehicle row
+    And "<userType>" click Add Event button
+    Then if any compulsory field is not filled, "This value should not be blank." message should be displayed after clicking on save button
+    Examples:
+      | userType      |
+      | sales manager |
+      | store manager |

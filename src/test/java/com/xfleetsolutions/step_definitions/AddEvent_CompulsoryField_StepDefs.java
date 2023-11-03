@@ -7,6 +7,7 @@ import com.xfleetsolutions.utilities.BrowserUtils;
 import com.xfleetsolutions.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.asynchttpclient.util.Assertions;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -91,5 +92,22 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
         }
         Assert.assertEquals(expectedReqFields, actualReqFields);
     }
+
+    @Then("if any compulsory field is not filled, {string} message should be displayed after clicking on save button")
+    public void if_any_compulsory_field_is_not_filled_message_should_be_displayed_after_clicking_on_save_button(String expectedMessage) {
+
+        // All fields empty, user click on save
+        ae.saveButton.click();
+        String actualMessage = ae.errorMessage.getText();
+        Assert.assertEquals(expectedMessage, actualMessage);
+
+        // User fill just Title field, other compulsory fields are empty
+        ae.titleField.sendKeys("Honda");
+        ae.saveButton.click();
+        BrowserUtils.sleep(3);
+        Assert.assertTrue(ae.addEventPopUp.isDisplayed());
+
+    }
+
 
 }
