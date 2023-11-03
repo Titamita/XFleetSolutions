@@ -34,4 +34,7 @@ public class AddEventPage {
     @FindBy(name = "oro_calendar_event_form[title]")
     public WebElement titleField;
 
+    @FindBy(xpath = "//button[@title='close']")
+    public WebElement closeButton;
+
 }
