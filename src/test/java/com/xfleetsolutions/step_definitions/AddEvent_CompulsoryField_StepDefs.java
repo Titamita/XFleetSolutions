@@ -29,6 +29,8 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
     @When("user hover over on Fleet button and click Vehicle button")
     public void user_hover_over_on_fleet_button_and_click_vehicle_button() {
 
+        waitUntilLoaderScreenDisappear();
+
         wait.until(ExpectedConditions.visibilityOf(fleetButton));
 
         actions.moveToElement(fleetButton).perform();
@@ -39,6 +41,7 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
     @When("click on vehicle row")
     public void click_on_vehicle_row() {
 
+        waitUntilLoaderScreenDisappear();
         fp.vehicleRow.click();
 
     }
@@ -46,12 +49,16 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
     @Then("user should access the Add Event page")
     public void user_should_access_the_add_event_page() {
 
+        waitUntilLoaderScreenDisappear();
         Assert.assertTrue(ae.generalInfo.isDisplayed());
 
     }
 
     @Then("{string} can click Add Event button, but driver can NOT see Add Event button")
     public void can_click_add_event_button_but_driver_can_not_see_add_event_button(String user) {
+
+        waitUntilLoaderScreenDisappear();
+
         BrowserUtils.sleep(3);
         if (user.equals("sales manager") || user.equals("store manager")) {
             Assert.assertTrue(ae.addEventButton.isDisplayed());
@@ -66,6 +73,7 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
     @When("{string} click Add Event button")
     public void click_add_event_button(String user) {
 
+        waitUntilLoaderScreenDisappear();
         ae.addEventButton.click();
 
     }
@@ -73,8 +81,11 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
     @Then("Add Event page should pop up")
     public void add_event_page_should_pop_up() {
 
+        waitUntilLoaderScreenDisappear();
         wait.until(ExpectedConditions.visibilityOf(ae.addEventPopUp));
         Assert.assertTrue(ae.addEventPopUp.isDisplayed());
+        ae.closeButton.click();
+        BrowserUtils.sleep(2);
 
     }
 
@@ -91,10 +102,16 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
 
         }
         Assert.assertEquals(expectedReqFields, actualReqFields);
+
+        ae.closeButton.click();
+        BrowserUtils.sleep(2);
+
     }
 
     @Then("if any compulsory field is not filled, {string} message should be displayed after clicking on save button")
     public void if_any_compulsory_field_is_not_filled_message_should_be_displayed_after_clicking_on_save_button(String expectedMessage) {
+
+        waitUntilLoaderScreenDisappear();
 
         // All fields empty, user click on save
         ae.saveButton.click();
@@ -104,8 +121,11 @@ public class AddEvent_CompulsoryField_StepDefs extends BasePage {
         // User fill just Title field, other compulsory fields are empty
         ae.titleField.sendKeys("Honda");
         ae.saveButton.click();
-        BrowserUtils.sleep(3);
+
         Assert.assertTrue(ae.addEventPopUp.isDisplayed());
+
+        ae.closeButton.click();
+        BrowserUtils.sleep(2);
 
     }
 
