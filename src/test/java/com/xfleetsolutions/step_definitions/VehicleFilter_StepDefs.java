@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleFilter_StepDefs extends BasePage{
@@ -27,7 +28,8 @@ public class VehicleFilter_StepDefs extends BasePage{
     @Given("user clicks on Filter icon")
     public void user_clicks_on_filter_icon() {
 
-        BrowserUtils.waitForVisibility(fleetVehiclesPage.filterButton, 15);
+        BrowserUtils.sleep(2);
+        //BrowserUtils.waitForClickablility(By.xpath("//a[@title='Filters']"), 20);
 
         fleetVehiclesPage.filterButton.click();
 
@@ -94,6 +96,25 @@ public class VehicleFilter_StepDefs extends BasePage{
         }
 
 
+
+    }
+
+    @Then("Manage Filter should contain the following filters")
+    public void manageFilterShouldContainTheFollowingFilters(List<String> expectedCheckboxes) {
+
+        BrowserUtils.waitForVisibility(By.xpath("//input[@name='multiselect_0']"), 15);
+
+        List<String> actualCheckboxes = new ArrayList<>();
+
+        for(WebElement each : fleetVehiclesPage.allFilterCheckBoxesAfterSearch){
+
+            actualCheckboxes.add(each.getText());
+
+        }
+
+        //System.out.println(actualCheckboxes);
+
+        Assert.assertEquals(expectedCheckboxes, actualCheckboxes);
 
     }
 }
