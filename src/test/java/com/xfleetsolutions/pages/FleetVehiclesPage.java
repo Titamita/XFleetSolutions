@@ -40,6 +40,6 @@ public class FleetVehiclesPage {
     @FindBy(xpath = "//input[@type='search']")
     public WebElement manageFilterSearchBox;
 
-    @FindBy(xpath = "//input[@name='multiselect_0']")
+    @FindBy(xpath = "//input[@name='multiselect_0']/following-sibling::span")
     public List<WebElement> allFilterCheckBoxesAfterSearch;
 }
