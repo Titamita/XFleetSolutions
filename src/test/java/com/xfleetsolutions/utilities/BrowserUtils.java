@@ -14,6 +14,19 @@ import java.util.List;
 import java.util.Set;
 
 public class BrowserUtils {
+    public static int parseIntWithComma(String input) {
+        // Remove any commas from the input string
+        String cleanedInput = input.replace(",", "");
+
+        try {
+            // Parse the cleaned string as an integer
+            return Integer.parseInt(cleanedInput);
+        } catch (NumberFormatException e) {
+            // Handle the case where the input is not a valid integer
+            // You can choose to throw an exception, return a default value, or handle it as needed
+            return 0; // Default value (you can change this to another value if needed)
+        }
+    }
 
 
     /*
