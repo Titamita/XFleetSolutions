@@ -21,14 +21,18 @@ public class SelectionOfVehicles_StepDefs extends BasePage {
     }
 
 
-    @Then("user selects the first checkbox to check all the cars")
-    public void userSelectsTheFirstCheckboxToCheckAllTheCars() {
+    @Then("user clicks the first checkbox and sees all the checkboxes are selected")
+    public void userClicksTheFirstCheckboxAndSeesAllTheCheckboxesAreSelected() {
 
         BrowserUtils.waitForVisibility(fleetVehiclesPage.toCheckAllCarsCheckbox, 2);
 
         fleetVehiclesPage.toCheckAllCarsCheckbox.click();
 
         Assert.assertTrue(fleetVehiclesPage.toCheckAllCarsCheckbox.isSelected());
+
+        for (WebElement each : fleetVehiclesPage.checkboxesForCarSelection) {
+            Assert.assertTrue(each.isSelected());
+        }
 
     }
 
