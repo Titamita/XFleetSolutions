@@ -51,7 +51,7 @@ Feature: Users should be able to filter vehicle table under Fleet-Vehicle page
     #-----------------------------------------------------------------------------
     # CREATED EXTRA ACCEPTANCE CRITERIA BELOW
 
-  @wip
+  @wipjd
   Scenario Outline: Validate the Manage Filters menu contains the following filters:
     #License Plate - Tags - Driver - Location - Chassis Number - Model Year - Last Odometer -
     #Immatriculation Date - First Contract Date - Catalog Value (VAT Incl.) - Seats Number -
@@ -88,3 +88,22 @@ Feature: Users should be able to filter vehicle table under Fleet-Vehicle page
       | sales manager |
       | store manager |
 
+
+    @wipjd
+    #Worked on as an additional US-154 for extra practice ==> AC1 and AC2
+Scenario Outline: User should be able to use Tags filter under Fleet-Vehicles page
+  Given the user logged in as "<userType>"
+  And user clicks on Fleet Module and select Vehicles from dropdown
+  And user clicks on Filter icon
+  And user clicks on Manage Filter button
+  When user select Tags filter from dropdown option
+  And  user clicks on Tags All filter
+  Then Tags filter should provide the methods in a dropdown option as shown below
+    | Is Any Of     |
+    | Is Not Any Of |
+
+  Examples:
+    | userType      |
+    | driver        |
+    | sales manager |
+    | store manager |

@@ -42,4 +42,15 @@ public class FleetVehiclesPage {
 
     @FindBy(xpath = "//input[@name='multiselect_0']/following-sibling::span")
     public List<WebElement> allFilterCheckBoxesAfterSearch;
+
+    @FindBy(xpath = "//div[@class='btn filter-criteria-selector oro-drop-opener oro-dropdown-toggle filter-default-value']")
+    public WebElement tagsFilterOption;
+
+    @FindBy(xpath = "//button[@class='btn dropdown-toggle']")
+    public WebElement isAnyOfButton;
+
+    @FindBy(xpath = "//a[@class='dropdown-item choice-value']")
+    public List<WebElement> isAnyOfFilterOptions;
+
+
 }
