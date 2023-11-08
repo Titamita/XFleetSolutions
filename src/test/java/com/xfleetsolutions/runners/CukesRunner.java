@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/xfleetsolutions/step_definitions",
         dryRun = false,
-        tags = "@carDeletion",
+        tags = "@wip",
         publish = true //generating a report with public link
 )
 public class CukesRunner {}
