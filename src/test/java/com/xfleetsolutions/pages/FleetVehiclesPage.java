@@ -36,4 +36,10 @@ public class FleetVehiclesPage {
 
     @FindBy(xpath = "//table//tr//input[@type='checkbox']")
     public List<WebElement> checkboxesForCarSelection;
+
+    @FindBy(xpath = "//input[@type='search']")
+    public WebElement manageFilterSearchBox;
+
+    @FindBy(xpath = "//input[@name='multiselect_0']/following-sibling::span")
+    public List<WebElement> allFilterCheckBoxesAfterSearch;
 }

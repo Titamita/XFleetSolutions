@@ -8,6 +8,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleFilter_StepDefs extends BasePage{
 
@@ -23,6 +28,9 @@ public class VehicleFilter_StepDefs extends BasePage{
     @Given("user clicks on Filter icon")
     public void user_clicks_on_filter_icon() {
 
+        BrowserUtils.sleep(2);
+        //BrowserUtils.waitForClickablility(By.xpath("//a[@title='Filters']"), 20);
+
         fleetVehiclesPage.filterButton.click();
 
 
@@ -37,6 +45,8 @@ public class VehicleFilter_StepDefs extends BasePage{
     @Given("user clicks on Manage Filter button")
     public void user_clicks_on_manage_filter_button() {
 
+        BrowserUtils.waitForVisibility(fleetVehiclesPage.manageFilterButton, 10);
+
         fleetVehiclesPage.manageFilterButton.click();
 
     }
@@ -46,16 +56,65 @@ public class VehicleFilter_StepDefs extends BasePage{
         switch (checkbox) {
             case "Tags":
                 fleetVehiclesPage.tagsCheckBox.click();
+                BrowserUtils.waitForVisibility(fleetVehiclesPage.tagsCheckBox, 5);
                 Assert.assertTrue(fleetVehiclesPage.tagsCheckBox.isSelected());
                 break;
             case "Driver":
                 fleetVehiclesPage.driverCheckBox.click();
+                BrowserUtils.waitForVisibility(fleetVehiclesPage.driverCheckBox, 5);
                 Assert.assertTrue(fleetVehiclesPage.driverCheckBox.isSelected());
                 break;
             case "Location":
                 fleetVehiclesPage.locationCheckBox.click();
+                BrowserUtils.waitForVisibility(fleetVehiclesPage.locationCheckBox, 5);
                 Assert.assertTrue(fleetVehiclesPage.locationCheckBox.isSelected());
         }
+
+    }
+
+    @Then("user type {string} in the Manage Filter search box")
+    public void user_type_in_the_manage_filter_search_box(String filterName) {
+
+        fleetVehiclesPage.manageFilterSearchBox.sendKeys(filterName);
+    }
+    @When("user should see {string} as available filter")
+    public void user_should_see_as_available_filter(String expectedFilterName) {
+
+        List<WebElement> actualFilterCheckboxes = fleetVehiclesPage.allFilterCheckBoxesAfterSearch;
+
+        for (WebElement each : actualFilterCheckboxes) {
+
+            String actualCheckboxText = each.getAttribute("title");
+
+            //System.out.println("Actual checkbox text: " + actualCheckboxText);
+
+            if (actualCheckboxText.contains(expectedFilterName)) {
+
+                Assert.assertEquals(expectedFilterName, actualCheckboxText);
+                break;
+            }
+        }
+
+
+
+    }
+
+    @Then("Manage Filter should contain the following filters")
+    public void manageFilterShouldContainTheFollowingFilters(List<String> expectedCheckboxes) {
+
+        BrowserUtils.waitForVisibility(By.xpath("//input[@name='multiselect_0']"), 15);
+
+        List<String> actualCheckboxes = new ArrayList<>();
+
+        for(WebElement each : fleetVehiclesPage.allFilterCheckBoxesAfterSearch){
+
+            actualCheckboxes.add(each.getText());
+
+        }
+
+        //System.out.println(actualCheckboxes);
+
+        Assert.assertEquals(expectedCheckboxes, actualCheckboxes);
 
     }
 }
