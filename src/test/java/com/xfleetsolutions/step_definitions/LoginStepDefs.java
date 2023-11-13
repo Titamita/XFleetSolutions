@@ -1,9 +1,16 @@
 package com.xfleetsolutions.step_definitions;
 
 import com.xfleetsolutions.pages.LoginPage;
+import com.xfleetsolutions.utilities.BrowserUtils;
 import com.xfleetsolutions.utilities.ConfigurationReader;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
+
 public class LoginStepDefs {
+
+    LoginPage loginPage=new LoginPage();
 
 
     @Given("the user is on the login page")
@@ -33,12 +40,27 @@ public class LoginStepDefs {
 
     @Given("the user logged in with username as {string} and password as {string}")
     public void the_user_logged_in_with_username_as_and_password_as(String username, String password) {
-      LoginPage loginPage=new LoginPage();
+
       loginPage.login(username,password);
     }
 
 
+    @When("the user login with {string} and {string}")
+    public void theUserLoginWithAnd(String username, String password) {
 
+        loginPage.login(username, password);
 
+    }
 
+    @Then("user should not be able to log in")
+    public void userShouldNotBeAbleToLogIn() {
+
+        BrowserUtils.verifyTitle("Login");
+
+        String expectedErrorMessage = "Invalid user name or password.";
+        String actualErrorMessage = loginPage.invalidUsernameOrPasswordErrorMessage.getText();
+
+        Assert.assertEquals(expectedErrorMessage, actualErrorMessage);
+
+    }
 }
