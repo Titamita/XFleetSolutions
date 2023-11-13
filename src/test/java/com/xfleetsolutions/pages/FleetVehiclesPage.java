@@ -52,5 +52,19 @@ public class FleetVehiclesPage {
     @FindBy(xpath = "//a[@class='dropdown-item choice-value']")
     public List<WebElement> isAnyOfFilterOptions;
 
+    @FindBy(id = "s2id_autogen2")
+    public WebElement isAnyOfInputTextBox;
+
+    @FindBy(xpath = "//div[.='Compact']")
+    public WebElement compactOption;
+
+    @FindBy(xpath = "//button[.='Update']")
+    public WebElement updateButton;
+
+    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']/tbody/tr/td/ul/li[.='Compact']")
+    public List<WebElement> compactTagsResult;
+
+    @FindBy(xpath = "(//table[@class='grid table-hover table table-bordered table-condensed']/tbody/tr/td/ul/li[.='Compact'])[1]")
+    public WebElement compactFirstRowResult;
 
 }
