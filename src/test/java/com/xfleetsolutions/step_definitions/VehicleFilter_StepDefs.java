@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class VehicleFilter_StepDefs extends BasePage {
@@ -158,5 +159,40 @@ public class VehicleFilter_StepDefs extends BasePage {
 
     }
 
+    @And("user selects Is Any Of method with Compact option and clicks Update")
+    public void userSelectsIsAnyOfMethodWithCompactOptionAndClicksUpdate() {
+
+        fleetVehiclesPage.isAnyOfInputTextBox.click();
+
+        BrowserUtils.waitForClickablility(fleetVehiclesPage.compactOption, 10);
+
+        fleetVehiclesPage.compactOption.click();
+
+        fleetVehiclesPage.updateButton.click();
+
+
+    }
+
+    @Then("table should contain Compact Tags only")
+    public void tableShouldContainCompactTagsOnly() {
+
+        List<String> expectedTagsResult = new ArrayList<>();
+        expectedTagsResult.addAll(Arrays.asList("Compact", "Compact", "Compact", "Compact", "Compact"));
+
+        List<String> actualTagsResult = new ArrayList<>();
+
+        for(WebElement each : fleetVehiclesPage.compactTagsResult){
+
+            actualTagsResult.add(each.getText());
+
+        }
+
+        Assert.assertEquals(expectedTagsResult, actualTagsResult);
+
+
+        // This is verifying only the first row result to show 'Compact'
+        //Assert.assertEquals("Compact", fleetVehiclesPage.compactFirstRowResult.getText());
+
+    }
 }
 
