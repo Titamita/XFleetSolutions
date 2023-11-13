@@ -57,7 +57,7 @@ Feature: Users should be able to filter vehicle table under Fleet-Vehicle page
     #Immatriculation Date - First Contract Date - Catalog Value (VAT Incl.) - Seats Number -
     #Doors Number - Color - Transmission - Fuel Type - CO2 Emissions - Horsepower - Horsepower Taxation -
     #Power (KW)
-  Given the user logged in as "<userType>"
+    Given the user logged in as "<userType>"
     And user clicks on Fleet Module and select Vehicles from dropdown
     And user clicks on Filter icon
     And user clicks on Manage Filter button
@@ -89,21 +89,58 @@ Feature: Users should be able to filter vehicle table under Fleet-Vehicle page
       | store manager |
 
 
-    @wipjd
+  @B30G10-210 @wipnew
     #Worked on as an additional US-154 for extra practice ==> AC1 and AC2
-Scenario Outline: User should be able to use Tags filter under Fleet-Vehicles page
-  Given the user logged in as "<userType>"
-  And user clicks on Fleet Module and select Vehicles from dropdown
-  And user clicks on Filter icon
-  And user clicks on Manage Filter button
-  When user select Tags filter from dropdown option
-  And  user clicks on Tags All filter
-  Then Tags filter should provide the methods in a dropdown option as shown below
-    | Is Any Of     |
-    | Is Not Any Of |
+  Scenario Outline: User should be able to use Tags filter under Fleet-Vehicles page
+    Given the user logged in as "<userType>"
+    And user clicks on Fleet Module and select Vehicles from dropdown
+    And user clicks on Filter icon
+    And user clicks on Manage Filter button
+    When user select Tags filter from dropdown option
+    And  user clicks on Tags All filter
+    Then Tags filter should provide the methods in a dropdown option as shown below
+      | Is Any Of     |
+      | Is Not Any Of |
 
-  Examples:
-    | userType      |
-    | driver        |
-    | sales manager |
-    | store manager |
+    Examples:
+      | userType      |
+      | driver        |
+      | sales manager |
+      | store manager |
+
+
+
+    @B30G10-211 @wipnew
+      #US-154 / AC3 for extra practice
+  Scenario Outline: User should be able to use Tags filter under Fleet-Vehicles page
+    Given the user logged in as "<userType>"
+    And user clicks on Fleet Module and select Vehicles from dropdown
+    And user clicks on Filter icon
+    And user clicks on Manage Filter button
+    When user select Tags filter from dropdown option
+    And  user clicks on Tags All filter
+    And user selects Is Any Of method with Compact option and clicks Update
+    Then table should contain Compact Tags only
+
+    Examples:
+      | userType      |
+      | driver        |
+      | sales manager |
+      | store manager |
+
+
+
+        # Negative Testing - invalid login - this should be under Login.feature page which I don't have
+
+
+  Scenario Outline: Login with invalid credentials
+    #Given the user is on the login page
+    When the user login with "<username>" and "<password>"
+    Then user should not be able to log in
+
+    Examples:
+      | username        | password      |
+      | abcd            | UserUser123   |
+      | salesmanager101 | abcd          |
+      | xyz             | wrongPassword |
+      | wrongUserName   | empty         |
